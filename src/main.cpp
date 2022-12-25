@@ -163,6 +163,8 @@ void uiThread (void * parameter) {
       u8x8.home();
     }
     if (hasFix) {
+      Serial.print("HDOP:  ");
+      Serial.println(dispBuffer[4] / 10.0);
       u8x8.print("HDOP:  ");
       u8x8.println(dispBuffer[4] / 10.0);
       u8x8.print("Sat:   ");
@@ -180,6 +182,11 @@ void uiThread (void * parameter) {
       u8x8.print("Bat:   ");
       u8x8.println(vbat, 2);
     } else {
+      Serial.println("NO FIX");
+      Serial.print("Sat:   ");
+      Serial.print(dispBuffer[5]);
+      Serial.print("/");
+      Serial.println(dispBuffer[0]);
       u8x8.println("NO FIX");
       u8x8.print("Sat:   ");
       u8x8.print(dispBuffer[5]);
@@ -195,6 +202,8 @@ void uiThread (void * parameter) {
 }
 
 void setup() {
+  Serial.begin(115200);
+
   // Setup Hardware
   pinMode(BAT_PIN, INPUT);
   
